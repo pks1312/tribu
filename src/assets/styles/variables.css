@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;600;700&display=swap');
+
+/* Breakpoints */
+:root {
+  --breakpoint-xs: 320px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+:root[data-theme='light'] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --bg-tertiary: #E0E0E0;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F8F9FA;
+  
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --text-inverse: #FFFFFF;
+  
+  --border-color: #E0E0E0;
+  --border-hover: #D0D0D0;
+  
+  --accent-primary: #A8E6CF;
+  --accent-secondary: #7FD3B0;
+  --accent-tertiary: #4ECDC4;
+  --accent-hover: #8DD5B8;
+  --accent-light: rgba(168, 230, 207, 0.15);
+  
+  --mint-green: #A8E6CF;
+  --mint-green-dark: #7FD3B0;
+  --mint-green-light: #C5F4E8;
+  --teal: #4ECDC4;
+  --teal-dark: #3BA8A0;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+  
+  --gradient-primary: linear-gradient(135deg, #A8E6CF 0%, #7FD3B0 100%);
+  --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
+  
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+:root[data-theme='dark'] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --bg-card: #2d2d2d;
+  --bg-hover: #333333;
+  
+  --text-primary: #F5F5F5;
+  --text-secondary: #E0E0E0;
+  --text-tertiary: #CCCCCC;
+  --text-inverse: #333333;
+  
+  --border-color: #404040;
+  --border-hover: #555555;
+  
+  --accent-primary: #7FD3B0;
+  --accent-secondary: #A8E6CF;
+  --accent-tertiary: #6ED4CD;
+  --accent-hover: #8DD5B8;
+  --accent-light: rgba(127, 211, 176, 0.15);
+  
+  --mint-green: #7FD3B0;
+  --mint-green-dark: #5FB896;
+  --mint-green-light: #A8E6CF;
+  --teal: #6ED4CD;
+  --teal-dark: #4ECDC4;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+  
+  --gradient-primary: linear-gradient(135deg, #7FD3B0 0%, #A8E6CF 100%);
+  --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}

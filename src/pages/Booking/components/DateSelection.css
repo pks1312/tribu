@@ -1,0 +1,93 @@
+.date-selection {
+  width: 100%;
+}
+
+.dates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.date-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+}
+
+.date-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.date-card.selected {
+  border-color: var(--accent-primary);
+  background: var(--gradient-primary);
+}
+
+.date-card.today {
+  border-color: #10b981;
+}
+
+.date-day {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.date-card.selected .date-day {
+  color: var(--text-inverse);
+}
+
+.date-month {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.date-card.selected .date-month {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.date-weekday {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.date-card.selected .date-weekday {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.selected-date-info {
+  background: var(--bg-card);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.selected-date-info p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.selected-date-info strong {
+  color: var(--accent-primary);
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}

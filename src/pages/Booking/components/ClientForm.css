@@ -1,0 +1,44 @@
+.client-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textarea-field {
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+  resize: vertical;
+  width: 100%;
+}
+
+.textarea-field:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.textarea-field::placeholder {
+  color: var(--text-tertiary);
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.navigation-buttons .btn {
+  flex: 1;
+}
