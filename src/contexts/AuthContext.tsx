@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import api from '@/services/api/config';
 import type { User, UserRole } from '@/types/user';
 
 interface AuthContextType {
@@ -21,59 +22,84 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Cargar usuario desde localStorage al iniciar
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    // Intentar obtener el usuario actual desde el backend
+    const loadUser = async () => {
       try {
-        setUser(JSON.parse(storedUser));
+        const response = await api.get('/accounts/users/me/');
+        if (response.data && response.data.id) {
+          const userData: User = {
+            id: response.data.id.toString(),
+            email: response.data.email,
+            displayName: response.data.first_name || response.data.username,
+            role: response.data.profile?.role || 'client',
+            active: true
+          };
+          setUser(userData);
+          localStorage.setItem('user', JSON.stringify(userData));
+        }
       } catch (error) {
-        console.error('Error parsing stored user:', error);
+        console.error('Error loading user:', error);
         localStorage.removeItem('user');
+      } finally {
+        setLoading(false);
       }
-    }
-    setLoading(false);
+    };
+    
+    loadUser();
   }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {
-    // Simulación de login - En producción esto debe conectarse al backend Django
-    // TODO: Implementar autenticación con Django REST Framework
-    
-    // Usuario admin de prueba
-    if (email === 'admin@tribu.com' && password === 'admin123') {
-      const adminUser: User = {
-        id: '1',
-        email: 'admin@tribu.com',
-        displayName: 'Administrador',
-        role: 'admin',
-        active: true
-      };
-      setUser(adminUser);
-      localStorage.setItem('user', JSON.stringify(adminUser));
-      return;
+    try {
+      // Login con el backend Django
+      const response = await api.post('/accounts/users/login/', {
+        username: email,  // Django usa 'username', puede ser email o nombre de usuario
+        password: password
+      });
+      
+      if (response.data && response.data.user) {
+        const userData: User = {
+          id: response.data.user.id.toString(),
+          email: response.data.user.email,
+          displayName: response.data.user.first_name || response.data.user.username,
+          role: response.data.user.profile?.role || 'client',
+          active: true
+        };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
+    } catch (error: any) {
+      console.error('Login error:', error);
+      throw new Error(error.response?.data?.detail || 'Error al iniciar sesión');
     }
-    
-    // Usuario cliente de prueba
-    const clientUser: User = {
-      id: Date.now().toString(),
-      email,
-      displayName: email.split('@')[0],
-      role: 'client',
-      active: true
-    };
-    setUser(clientUser);
-    localStorage.setItem('user', JSON.stringify(clientUser));
   }, []);
 
   const signOut = useCallback(async () => {
-    setUser(null);
-    localStorage.removeItem('user');
+    try {
+      await api.post('/accounts/users/logout/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      setUser(null);
+      localStorage.removeItem('user');
+    }
   }, []);
 
   const refreshProfile = useCallback(async () => {
-    // Recargar perfil desde localStorage o backend
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    try {
+      const response = await api.get('/accounts/users/me/');
+      if (response.data && response.data.id) {
+        const userData: User = {
+          id: response.data.id.toString(),
+          email: response.data.email,
+          displayName: response.data.first_name || response.data.username,
+          role: response.data.profile?.role || 'client',
+          active: true
+        };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
+    } catch (error) {
+      console.error('Error refreshing profile:', error);
     }
   }, []);
 
