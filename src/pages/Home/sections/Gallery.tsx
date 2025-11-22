@@ -4,10 +4,10 @@ import './Gallery.css';
 
 export const Gallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
-  const { galleryItems, loading } = useGallery(selectedCategory === 'Todos' ? undefined : selectedCategory);
+  const { images: galleryItems, loading } = useGallery(selectedCategory === 'Todos' ? undefined : selectedCategory);
 
   const categories = useMemo(() => {
-    const allCategories = Array.from(new Set(galleryItems.map(item => item.category)));
+    const allCategories = Array.from(new Set((galleryItems || []).map(item => item.category)));
     return ['Todos', ...allCategories];
   }, [galleryItems]);
 
@@ -25,7 +25,7 @@ export const Gallery: React.FC = () => {
           <div className="gallery-loading">
             <p>Cargando galería...</p>
           </div>
-        ) : galleryItems.length > 0 ? (
+        ) : (galleryItems && galleryItems.length > 0) ? (
           <>
             {categories.length > 1 && (
               <div className="gallery-filters">
