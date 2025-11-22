@@ -8,7 +8,6 @@ const ServicesPage = lazy(() => import('@/pages/Services').then(module => ({ def
 const Booking = lazy(() => import('@/pages/Booking').then(module => ({ default: module.Booking })));
 const Login = lazy(() => import('@/pages/Auth').then(module => ({ default: module.Login })));
 const Dashboard = lazy(() => import('@/pages/Admin').then(module => ({ default: module.Dashboard })));
-const InitFirestore = lazy(() => import('@/pages/Admin/InitFirestore').then(module => ({ default: module.InitFirestore })));
 
 const LoadingFallback = () => (
   <div style={{ 
@@ -39,7 +38,6 @@ const AppContent: React.FC = () => {
           <Route path="/booking" element={<Booking />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/init" element={<InitFirestore />} />
         </Routes>
       </Suspense>
       {!isBookingPage && !isAdminPage && !isLoginPage && <Footer />}
