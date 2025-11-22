@@ -50,9 +50,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = useCallback(async (email: string, password: string) => {
     try {
-      // Login con el backend Django
+      // Login con el backend Django (acepta email o username)
       const response = await api.post('/accounts/users/login/', {
-        username: email,  // Django usa 'username', puede ser email o nombre de usuario
+        email: email,  // El backend acepta tanto 'email' como 'username'
         password: password
       });
       
